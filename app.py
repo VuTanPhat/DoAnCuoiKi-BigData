@@ -4,6 +4,7 @@ import pickle
 import requests
 import pandas as pd
 from patsy import dmatrices
+import random
 
 movies = pickle.load(open('model/movies_list.pkl', 'rb'))
 similarity = pickle.load(open('model/similarity.pkl', 'rb'))
@@ -21,12 +22,29 @@ def recommend(movie):
     distances = sorted(list(enumerate(similarity[index])), reverse= True, key=lambda x: x[1])
     recommended_movies_name = []
     recommended_movies_poster = []
-    for i in distances[1:6]:
+    for i in distances[1:9]:
         movie_id = movies.iloc[i[0]].movie_id
         recommended_movies_poster.append(fetch_poster(movie_id))
         recommended_movies_name.append(movies.iloc[i[0]].title)
 
     return recommended_movies_name, recommended_movies_poster
+#def reandom(movie):
+def toprate(movie):
+    top_rate_movie = movies.sort_values('rating', ascending=False)
+    distances = sorted(list(enumerate[top_rate_movie]), reverse= True, key=lambda x: x[1])
+    recommended_movies_name = []
+    recommended_movies_poster = []
+    for i in distances[1:9]:
+        movie_id = movies.iloc[i[0]].movie_id
+        recommended_movies_poster.append(fetch_poster(movie_id))
+        recommended_movies_name.append(movies.iloc[i[0]].title)
+        
+    return recommended_movies_name, recommended_movies_poster
+
+
+
+
+
 
 app = Flask(__name__)
 
@@ -67,6 +85,31 @@ def recommendation():
 
     else:
         return render_template("prediction.html", movie_list = movie_list, status = status)
+
+@app.route('/toprate', methods=['POST'])
+def toprate():
+    # Xử lý sự kiện click cho button Top movie
+    if request.method == 'POST':
+        try:
+            if request.form:
+        # Lấy dữ liệu từ form
+                movies_name = request.form['movies']
+                print(movies_name)
+        # Gọi hàm Python để lấy danh sách phim được đề xuất
+                recommended_movies_name, recommended_movies_poster = toprate(movies_name)
+                print(recommended_movies_name)
+                print(recommended_movies_poster)
+                status = True
+        # Trả về danh sách phim được đề xuất
+            return render_template('prediction.html', recommended_movies_name=recommended_movies_name, recommended_movies_poster=recommended_movies_poster)
+        
+        
+        except Exception as e:
+           error = {'error': e}
+           return render_template("prediction.html",error = error, status = status)
+
+    else:
+        return render_template("prediction.html", status = status)
 
 
 
