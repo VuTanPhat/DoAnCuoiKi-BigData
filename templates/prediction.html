@@ -32,12 +32,15 @@
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Movie Recommendation System</h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">A movie recommendation system, or a movie recommender system, is an ML-based approach to filtering or predicting the users’ film preferences based on their past choices and behavior. It’s an advanced filtration mechanism that predicts the possible movie choices of the concerned user and their preferences towards a domain-specific item, aka movie.</p>
             <br>
+	   
+	   </form>
             <p class="text-primary"><b>{{error}}</b></p><br>
           
           <div class="row text-center">
             <div class="col-md-3"></div>
             <div class="center col-md-6">
               <form action="/recommendation" method="POST">
+	      
                 <select class="form-select" id="movies" name="movies" aria-label="Default select example">
                   {% for j in movie_list %}
                   <option value="{{j}}">{{j}}</option>
@@ -45,6 +48,10 @@
                   
                 </select><br>
                 <button type="submit" class="btn btn-success">Submit</button>
+		<br>
+		<form action="/toprate" method="post">
+	   
+	   <button type="submit" class="btn btn-success">Top movie</button>
               </form>
             </div>
           </div>
@@ -84,7 +91,36 @@
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{movies_name[3]}}</h2>
               </div>
             </div>
-            
+	  <div class="xl:w-1/4 md:w-1/2 p-3">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-50 rounded w-full object-cover object-center mb-6" src="{{poster[4]}}" alt="content">
+                <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Movie Name</h3>
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{movies_name[4]}}</h2>
+              </div>
+            </div>
+<div class="xl:w-1/4 md:w-1/2 p-3">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-50 rounded w-full object-cover object-center mb-6" src="{{poster[5]}}" alt="content">
+                <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Movie Name</h3>
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{movies_name[5]}}</h2>
+              </div>
+            </div>
+<div class="xl:w-1/4 md:w-1/2 p-3">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-50 rounded w-full object-cover object-center mb-6" src="{{poster[6]}}" alt="content">
+                <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Movie Name</h3>
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{movies_name[6]}}</h2>
+              </div>
+            </div>
+<div class="xl:w-1/4 md:w-1/2 p-3">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-50 rounded w-full object-cover object-center mb-6" src="{{poster[7]}}" alt="content">
+                <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Movie Name</h3>
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{movies_name[7]}}</h2>
+              </div>
+            </div>
+          
+
           </div>
         </div>
       </section>s
